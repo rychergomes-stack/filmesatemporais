@@ -1,1 +1,195 @@
-index.html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmes Atemporais</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0b0b0b;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(0,0,0,0.9);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      color: #e50914;
+      margin: 0;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .banner {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(to top, #000, transparent),
+        url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba') center/cover;
+    }
+
+    .banner h2 {
+      font-size: 2.5rem;
+      max-width: 600px;
+    }
+
+    .section {
+      padding: 40px;
+    }
+
+    .section h3 {
+      color: #e50914;
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #141414;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .card p {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+
+    .button {
+      display: block;
+      margin: 40px auto;
+      padding: 15px 30px;
+      background: #e50914;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .resultado {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #333;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Filmes Atemporais</h1>
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Filmes</a>
+    <a href="#">Listas</a>
+    <a href="#">Curiosidades</a>
+  </nav>
+</header>
+
+<div class="banner">
+  <h2>Alguns filmes não passam… eles ficam para sempre na memória.</h2>
+</div>
+
+<div class="section">
+  <h3>🎬 Destaques</h3>
+  <div class="cards">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/81aA7hEEykL._AC_SY679_.jpg">
+      <p>De Volta para o Futuro</p>
+    </div>
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/51NiGlapXlL._AC_.jpg">
+      <p>Titanic</p>
+    </div>
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/I/71niXI3lxlL._AC_SY679_.jpg">
+      <p>Clube da Luta</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>📋 Listas Nostálgicas</h3>
+  <div class="cards">
+    <div class="card"><p>Filmes que marcaram a infância</p></div>
+    <div class="card"><p>Filmes que vão mexer com você</p></div>
+    <div class="card"><p>Clássicos esquecidos</p></div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>🧠 Curiosidades</h3>
+  <div class="cards">
+    <div class="card"><p>Titanic quase teve outro final</p></div>
+    <div class="card"><p>Clube da Luta foi mal recebido no lançamento</p></div>
+  </div>
+</div>
+
+<button class="button" onclick="indicarFilme()">🎲 Me indica um filme</button>
+
+<div class="resultado" id="filme"></div>
+
+<footer>
+  <p>© 2026 Filmes Atemporais | Siga no Instagram</p>
+</footer>
+
+<script>
+  function indicarFilme() {
+    const filmes = [
+      "Interestelar — Uma jornada emocional pelo tempo.",
+      "O Show de Truman — Nada é o que parece.",
+      "Forrest Gump — A vida é como uma caixa de chocolates.",
+      "Clube da Luta — Você não fala sobre isso..."
+    ];
+
+    const sorteio = filmes[Math.floor(Math.random() * filmes.length)];
+    document.getElementById('filme').innerText = sorteio;
+  }
+</script>
+
+</body>
+</html>
+
