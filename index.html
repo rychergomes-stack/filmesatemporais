@@ -9,7 +9,7 @@
 
   <style>
     body { margin:0; font-family:'Poppins',sans-serif; background:#0b0b0b; color:#fff; }
-    header { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; background:#000; position:sticky; top:0; z-index:10; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; background:#000; position:sticky; top:0; }
     header h1 { color:#e50914; }
     nav a { color:#fff; margin-left:20px; text-decoration:none; }
 
@@ -27,7 +27,7 @@
     .card p { padding:10px; }
 
     .filme-detalhe { display:none; padding:40px; }
-    .filme-detalhe img { width:200px; float:left; margin-right:20px; }
+    .filme-detalhe iframe { width:100%; max-width:800px; height:450px; margin-top:20px; }
     .voltar { margin-top:20px; display:inline-block; cursor:pointer; color:#e50914; }
 
   </style>
@@ -73,25 +73,25 @@
   </div>
 </div>
 
-<!-- DETALHES -->
+<!-- DETALHES COM TRAILER -->
 <div id="futuro" class="filme-detalhe">
   <h2>De Volta para o Futuro</h2>
-  <img src="https://m.media-amazon.com/images/I/81aA7hEEykL._AC_SY679_.jpg">
   <p>Um jovem viaja no tempo e precisa garantir seu próprio futuro.</p>
+  <iframe src="https://www.youtube.com/embed/qvsgGtivCgs" frameborder="0" allowfullscreen></iframe>
   <span class="voltar" onclick="voltarHome()">⬅ Voltar</span>
 </div>
 
 <div id="titanic" class="filme-detalhe">
   <h2>Titanic</h2>
-  <img src="https://m.media-amazon.com/images/I/51NiGlapXlL._AC_.jpg">
   <p>Uma história de amor no navio mais famoso da história.</p>
+  <iframe src="https://www.youtube.com/embed/kVrqfYjkTdQ" frameborder="0" allowfullscreen></iframe>
   <span class="voltar" onclick="voltarHome()">⬅ Voltar</span>
 </div>
 
 <div id="truman" class="filme-detalhe">
   <h2>O Show de Truman</h2>
-  <img src="https://m.media-amazon.com/images/I/71niXI3lxlL._AC_SY679_.jpg">
   <p>Um homem descobre que sua vida inteira é um programa de TV.</p>
+  <iframe src="https://www.youtube.com/embed/dlnmQbPGuls" frameborder="0" allowfullscreen></iframe>
   <span class="voltar" onclick="voltarHome()">⬅ Voltar</span>
 </div>
 
