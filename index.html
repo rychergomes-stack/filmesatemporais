@@ -5,189 +5,123 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Filmes Atemporais</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
 <style>
-body { margin:0; font-family:'Poppins',sans-serif; background:#0b0b0b; color:#fff; }
+body { margin:0; background:#0b0b0b; color:#fff; font-family:Arial; }
+header { padding:20px; background:#000; }
+h1 { color:#e50914; }
 
-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 40px;
-  background:#000;
-  position:sticky;
-  top:0;
-}
-
-header h1 { color:#e50914; }
-
-.search input {
-  padding:10px;
-  border-radius:20px;
-  border:none;
-}
-
-.banner {
-  height:70vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  background:linear-gradient(to top,#000,transparent),
-  url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba') center/cover;
-}
-
-.banner h2 { font-size:2.5rem; }
-
-.section { padding:20px 40px; }
-
-.scroll {
-  display:flex;
-  overflow-x:auto;
-  gap:15px;
-}
+.container { padding:20px; }
+.scroll { display:flex; overflow-x:auto; gap:15px; }
 
 .card {
   min-width:180px;
-  border-radius:10px;
-  overflow:hidden;
   cursor:pointer;
-  position:relative;
   transition:0.3s;
 }
 
+.card:hover { transform:scale(1.1); }
+
 .card img {
   width:100%;
-  height:260px;
+  height:250px;
   object-fit:cover;
 }
 
-.card:hover { transform:scale(1.15); }
-
-.overlay {
-  position:absolute;
-  bottom:0;
-  width:100%;
-  background:linear-gradient(to top,#000,transparent);
-  padding:10px;
-  opacity:0;
-}
-
-.card:hover .overlay { opacity:1; }
-
-.filme-detalhe { display:none; padding:40px; }
-
-iframe {
-  width:100%;
-  max-width:800px;
-  height:450px;
-}
-
-.voltar {
-  display:block;
-  margin-top:20px;
-  color:#e50914;
-  cursor:pointer;
-}
+#detalhe { display:none; padding:20px; }
+iframe { width:100%; max-width:800px; height:450px; }
+.voltar { color:#e50914; cursor:pointer; display:block; margin-top:20px; }
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Filmes Atemporais</h1>
-  <div class="search">
-    <input type="text" id="busca" placeholder="Buscar filme..." onkeyup="buscar()">
-  </div>
+<h1>Filmes Atemporais</h1>
 </header>
 
-<div id="home">
-
-<div class="banner">
-  <h2>Alguns filmes não passam… eles ficam.</h2>
+<div class="container">
+<div class="scroll" id="lista"></div>
 </div>
 
-<div class="section">
-  <h3>🔥 Populares</h3>
-  <div class="scroll" id="lista">
-
-    <div class="card" onclick="abrir('titanic')">
-      <img src="https://m.media-amazon.com/images/I/51NiGlapXlL._AC_.jpg">
-      <div class="overlay"><p>Titanic (1997)</p></div>
-    </div>
-
-    <div class="card" onclick="abrir('forrest')">
-      <img src="https://m.media-amazon.com/images/I/61+2X8U9HLL._AC_SY679_.jpg">
-      <div class="overlay"><p>Forrest Gump (1994)</p></div>
-    </div>
-
-    <div class="card" onclick="abrir('matrix')">
-      <img src="https://m.media-amazon.com/images/I/51EG732BV3L.jpg">
-      <div class="overlay"><p>Matrix (1999)</p></div>
-    </div>
-
-    <div class="card" onclick="abrir('truman')">
-      <img src="https://m.media-amazon.com/images/I/71niXI3lxlL._AC_SY679_.jpg">
-      <div class="overlay"><p>Show de Truman (1998)</p></div>
-    </div>
-
-  </div>
-</div>
-
-</div>
-
-<!-- DETALHES -->
-
-<div id="titanic" class="filme-detalhe">
-<h2>Titanic (1997)</h2>
-<p>Uma história de amor entre Jack e Rose a bordo do Titanic.</p>
-<iframe src="https://www.youtube.com/embed/kVrqfYjkTdQ"></iframe>
-<span class="voltar" onclick="voltar()">⬅ Voltar</span>
-</div>
-
-<div id="forrest" class="filme-detalhe">
-<h2>Forrest Gump (1994)</h2>
-<p>A incrível vida de um homem simples que vive momentos históricos.</p>
-<iframe src="https://www.youtube.com/embed/bLvqoHBptjg"></iframe>
-<span class="voltar" onclick="voltar()">⬅ Voltar</span>
-</div>
-
-<div id="matrix" class="filme-detalhe">
-<h2>Matrix (1999)</h2>
-<p>Um hacker descobre a verdade sobre a realidade.</p>
-<iframe src="https://www.youtube.com/embed/vKQi3bBA1y8"></iframe>
-<span class="voltar" onclick="voltar()">⬅ Voltar</span>
-</div>
-
-<div id="truman" class="filme-detalhe">
-<h2>O Show de Truman (1998)</h2>
-<p>Um homem descobre que sua vida inteira é um programa de TV.</p>
-<iframe src="https://www.youtube.com/embed/dlnmQbPGuls"></iframe>
-<span class="voltar" onclick="voltar()">⬅ Voltar</span>
-</div>
+<div id="detalhe"></div>
 
 <script>
-function abrir(id){
-  document.getElementById('home').style.display='none';
-  document.querySelectorAll('.filme-detalhe').forEach(e=>e.style.display='none');
-  document.getElementById(id).style.display='block';
+
+const filmes = [
+{
+nome: "O Poderoso Chefão (1972)",
+img: "https://m.media-amazon.com/images/I/41--5rK7a0L._AC_.jpg",
+desc: "A história da poderosa família mafiosa Corleone.",
+trailer: ""
+},
+{
+nome: "O Massacre da Serra Elétrica (1974)",
+img: "https://m.media-amazon.com/images/I/51p6XQYJ1LL._AC_.jpg",
+desc: "Um grupo de jovens encontra uma família de canibais.",
+trailer: ""
+},
+{
+nome: "Três Homens em Conflito (1966)",
+img: "https://m.media-amazon.com/images/I/51l5-0n5xPL._AC_.jpg",
+desc: "Três pistoleiros em busca de um tesouro durante a guerra.",
+trailer: ""
+},
+{
+nome: "Rocky: Um Lutador (1976)",
+img: "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_.jpg",
+desc: "Um boxeador desconhecido ganha uma chance pelo título.",
+trailer: ""
+},
+{
+nome: "O Exterminador do Futuro (1984)",
+img: "https://m.media-amazon.com/images/I/51jNORv6nQL._AC_.jpg",
+desc: "Um ciborgue é enviado do futuro para matar Sarah Connor.",
+trailer: ""
+},
+{
+nome: "Star Wars: Uma Nova Esperança (1977)",
+img: "https://m.media-amazon.com/images/I/81aA7hEEykL._AC_SY679_.jpg",
+desc: "A luta da Aliança Rebelde contra o Império Galáctico.",
+trailer: ""
+},
+{
+nome: "Sexta-Feira 13 (1980)",
+img: "https://m.media-amazon.com/images/I/51P0h7+N7zL._AC_.jpg",
+desc: "Jovens são perseguidos por um assassino em um acampamento.",
+trailer: ""
+}
+];
+
+const lista = document.getElementById("lista");
+
+filmes.forEach((f, i) => {
+  lista.innerHTML += `
+    <div class="card" onclick="abrir(${i})">
+      <img src="${f.img}">
+      <p>${f.nome}</p>
+    </div>
+  `;
+});
+
+function abrir(i){
+  document.querySelector(".container").style.display="none";
+  const f = filmes[i];
+
+  document.getElementById("detalhe").innerHTML = `
+    <h2>${f.nome}</h2>
+    <p>${f.desc}</p>
+    ${f.trailer ? `<iframe src="${f.trailer}" allowfullscreen></iframe>` : `<p><i>Trailer não adicionado ainda</i></p>`}
+    <span class="voltar" onclick="voltar()">⬅ Voltar</span>
+  `;
+
+  document.getElementById("detalhe").style.display="block";
 }
 
 function voltar(){
-  document.getElementById('home').style.display='block';
-  document.querySelectorAll('.filme-detalhe').forEach(e=>e.style.display='none');
+  document.querySelector(".container").style.display="block";
+  document.getElementById("detalhe").style.display="none";
 }
 
-function buscar(){
-  let input = document.getElementById('busca').value.toLowerCase();
-  let cards = document.querySelectorAll('.card');
-
-  cards.forEach(c=>{
-    let txt = c.innerText.toLowerCase();
-    c.style.display = txt.includes(input) ? 'block' : 'none';
-  });
-}
 </script>
 
 </body>
